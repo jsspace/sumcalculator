@@ -52,7 +52,7 @@ The calculator runs in the browser. The numbers typed are not sent to the site's
 
 Source: https://sumcalculator.net/contact/
 
-For general questions, suggestions, or problem reports, email `hello@sumcalculator.net`. For privacy questions, email `privacy@sumcalculator.net` or read the Privacy Policy. A small, non-sensitive example and the expected result can help explain a calculation problem. The site cannot see or recover numbers entered into the calculator unless the user chooses to include them in an email.
+For general questions, suggestions, or problem reports, email `yimin.space.fe@gmail.com`. For privacy questions, email `yimin.space.fe@gmail.com` or read the Privacy Policy. A small, non-sensitive example and the expected result can help explain a calculation problem. The site cannot see or recover numbers entered into the calculator unless the user chooses to include them in an email.
 
 ## Privacy Policy
 
@@ -68,7 +68,7 @@ The site uses Google Analytics 4 to understand visits. Google may receive page v
 
 The home page displays a badge image hosted by Findly.tools. Loading it sends a browser request to Findly.tools, which may receive standard request information such as IP address and browser details. Following that external link is subject to Findly.tools' privacy practices. Other external sites have their own policies.
 
-The policy may change as the site evolves. Privacy questions can be sent to `privacy@sumcalculator.net`.
+The policy may change as the site evolves. Privacy questions can be sent to `yimin.space.fe@gmail.com`.
 
 ## Terms of Use
 
@@ -82,4 +82,4 @@ Software or input mistakes can affect results. Sums use exact decimal arithmetic
 
 Users must not interfere with the site, attempt unauthorized access, or violate applicable law or others' rights. The calculator provides arithmetic output only; it does not provide accounting, financial, legal, medical, or other professional advice.
 
-To the extent permitted by applicable law, the site is provided “as is” and without warranties. The site operator is not liable for losses arising from use of, or inability to use, the site. Nothing in the terms excludes rights or liability that cannot legally be excluded. The terms may be revised, with the latest revision date shown on the page. Questions can be sent to `hello@sumcalculator.net`.
+To the extent permitted by applicable law, the site is provided “as is” and without warranties. The site operator is not liable for losses arising from use of, or inability to use, the site. Nothing in the terms excludes rights or liability that cannot legally be excluded. The terms may be revised, with the latest revision date shown on the page. Questions can be sent to `yimin.space.fe@gmail.com`.

@@ -16,7 +16,7 @@ Then open `http://localhost:8000/`.
 
 Connect this repository to Cloudflare Pages. Set the build command to none and the output directory to `dist`. Add `sumcalculator.net` as a custom domain after deploying. The repository already includes `robots.txt`, `sitemap.xml`, canonical URLs, and per-page metadata for that domain.
 
-Before launch, create and monitor `hello@sumcalculator.net` and `privacy@sumcalculator.net`, or replace those addresses in the legal pages with working contact addresses. Review the legal pages against the actual operator, jurisdiction, and any later analytics or advertising changes.
+The public contact address is `yimin.space.fe@gmail.com`. Review the legal pages against the actual operator, jurisdiction, and any later analytics or advertising changes.
 
 ## Search and analytics
 
