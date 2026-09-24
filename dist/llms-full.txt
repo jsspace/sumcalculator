@@ -1,4 +1,4 @@
-# SumCalculator.net
+# SumCalculator
 
 > A free browser-based tool for adding lists of numbers. The calculator shows an exact decimal sum, count, average, minimum, and maximum. Regular calculation is processed locally in the browser; optional AI extraction sends text to Cloudflare when selected.
 
@@ -42,7 +42,7 @@ Input: `12.5, 8.75, -3, 24.25`
 
 Source: https://sumcalculator.net/about/
 
-SumCalculator.net is an independent, focused tool for adding a list of numbers quickly. It is meant for small tasks such as adding receipts, scores, or numbers copied from notes without opening a spreadsheet.
+SumCalculator is an independent, focused tool for adding a list of numbers quickly. It is meant for small tasks such as adding receipts, scores, or numbers copied from notes without opening a spreadsheet.
 
 It reads plain numbers separated by lines, spaces, commas, or semicolons, then shows the total, number of values, average, smallest value, and largest value. It supports positive and negative decimal numbers. If an entry contains text or a symbol it cannot read, it shows an error so the list can be corrected.
 
@@ -76,7 +76,7 @@ Source: https://sumcalculator.net/terms/
 
 Last updated: September 24, 2026.
 
-By using SumCalculator.net, visitors agree to its terms. The site offers a free, browser-based tool for adding lists of numbers and displaying basic statistics, plus optional AI extraction from text. It may be used for lawful personal or business purposes. Users are responsible for their inputs and how they use the results.
+By using SumCalculator, visitors agree to its terms. The site offers a free, browser-based tool for adding lists of numbers and displaying basic statistics, plus optional AI extraction from text. It may be used for lawful personal or business purposes. Users are responsible for their inputs and how they use the results.
 
 Software or input mistakes can affect results. Sums use exact decimal arithmetic; repeating decimal averages are rounded to 10 places. Important totals should be verified independently, especially for financial, legal, medical, or other consequential uses. The site may change, suspend, or discontinue at any time.
 

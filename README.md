@@ -1,4 +1,4 @@
-# SumCalculator.net
+# SumCalculator
 
 A sum calculator with About, Contact, Privacy Policy, and Terms of Use pages. Regular calculation runs in the browser. Totals and extremes use decimal-string arithmetic with `BigInt`; averages are rounded to 10 decimal places. An optional AI button extracts numbers from messy text through Cloudflare Workers AI, then asks users to review the proposed list before calculating.
 
