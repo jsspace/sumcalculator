@@ -11,7 +11,12 @@ test('AI values must be decimal strings', () => {
 test('AI route calls the binding only for a valid explicit request', async () => {
   let calls = 0;
   const env = {
-    AI: { run: async () => { calls++; return { response: '{"numbers":["12.50","-3"]}' }; } },
+    AI: { run: async (model, options) => {
+      calls++;
+      assert.equal(model, '@cf/meta/llama-3.3-70b-instruct-fp8-fast');
+      assert.match(options.messages[0].content, /what is 7 plus 6/);
+      return { response: '{"numbers":["12.50","-3"]}' };
+    } },
     ASSETS: { fetch: async () => new Response('asset') },
   };
   const invalid = await worker.fetch(new Request('https://sumcalculator.net/api/parse', {
@@ -34,4 +39,12 @@ test('free allowance errors leave regular calculation available', async () => {
   }), { AI: { run: async () => { throw Object.assign(new Error('daily free allocation'), { status: 429 }); } } });
   assert.equal(response.status, 429);
   assert.match((await response.json()).error, /free AI allowance/);
+});
+
+test('paid-only model errors are reported instead of hidden as a generic 502', async () => {
+  const response = await worker.fetch(new Request('https://sumcalculator.net/api/parse', {
+    method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ input: 'waht is 7 plus 6' }),
+  }), { AI: { run: async () => { throw Object.assign(new Error('Model requires Workers Paid plan'), { code: 5035 }); } } });
+  assert.equal(response.status, 503);
+  assert.match((await response.json()).error, /Free plan/);
 });
