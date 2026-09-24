@@ -1,6 +1,6 @@
 # SumCalculator.net
 
-> A free browser-based tool for adding lists of numbers. The calculator shows an exact decimal sum, count, average, minimum, and maximum. Its input is processed locally in the browser.
+> A free browser-based tool for adding lists of numbers. The calculator shows an exact decimal sum, count, average, minimum, and maximum. Regular calculation is processed locally in the browser; optional AI extraction sends text to Cloudflare when selected.
 
 This file consolidates the site's public information. The linked HTML pages are the current source for the interactive tool and legal policies.
 
@@ -8,7 +8,7 @@ This file consolidates the site's public information. The linked HTML pages are 
 
 Source: https://sumcalculator.net/
 
-Paste or type a list of numbers into the input box. The result updates as the input changes. Values may be separated by commas, Chinese commas, semicolons, spaces, tabs, or line breaks. Plain positive and negative decimals are supported. Scientific notation is also accepted. Currency signs, percentages, labels, and other nonnumeric tokens cause an error; the calculator does not show a partial result.
+Paste or type a list of numbers into the input box. The result updates as the input changes. Values may be separated by commas, Chinese commas, semicolons, spaces, tabs, or line breaks. Plain positive and negative decimals are supported. Scientific notation is also accepted. Currency signs, percentages, labels, and other nonnumeric tokens cause an error in regular calculation; the calculator does not show a partial result. Only when the text cannot be read as a plain number list, an optional AI button appears to propose numbers extracted from text, which the user reviews before applying.
 
 The calculator shows:
 
@@ -36,7 +36,7 @@ Input: `12.5, 8.75, -3, 24.25`
 - Negative numbers and decimals such as `-3`, `0.5`, and `.75` are supported.
 - The average gives every value equal weight.
 - Always check the count against the number of values you intended to paste.
-- Calculations run in the browser. The site does not receive or save the list entered into the calculator.
+- Regular calculation runs in the browser. Optional AI extraction sends the entered text to Cloudflare only when clicked; the site does not save calculation history.
 
 ## About
 
@@ -46,13 +46,13 @@ SumCalculator.net is an independent, focused tool for adding a list of numbers q
 
 It reads plain numbers separated by lines, spaces, commas, or semicolons, then shows the total, number of values, average, smallest value, and largest value. It supports positive and negative decimal numbers. If an entry contains text or a symbol it cannot read, it shows an error so the list can be corrected.
 
-The calculator runs in the browser. The numbers typed are not sent to the site's server, saved to an account, or shared with the site operator. For critical financial or professional decisions, check the source data and verify the result independently.
+Regular calculation runs in the browser. Optional AI extraction sends the entered text to Cloudflare Workers AI when clicked; the site does not save calculation history. For critical financial or professional decisions, check the source data and verify the result independently.
 
 ## Contact
 
 Source: https://sumcalculator.net/contact/
 
-For general questions, suggestions, or problem reports, email `yimin.space.fe@gmail.com`. For privacy questions, email `yimin.space.fe@gmail.com` or read the Privacy Policy. A small, non-sensitive example and the expected result can help explain a calculation problem. The site cannot see or recover numbers entered into the calculator unless the user chooses to include them in an email.
+For general questions, suggestions, or problem reports, email `yimin.space.fe@gmail.com`. For privacy questions, email `yimin.space.fe@gmail.com` or read the Privacy Policy. A small, non-sensitive example and the expected result can help explain a calculation problem. The site does not save calculation history. Optional AI parsing sends the entered text to Cloudflare when clicked.
 
 ## Privacy Policy
 
@@ -60,7 +60,7 @@ Source: https://sumcalculator.net/privacy/
 
 Last updated: September 24, 2026.
 
-The numbers entered into the calculator are processed in the browser. The site does not send the list of numbers to a server. Entries and results remain in the open page on the user's device. The site does not require an account, store calculation history, or receive the list typed. The “Copy total” button uses the browser's clipboard only when selected. Closing or reloading the page clears entries.
+Regular calculation is processed in the browser; its entries and results remain in the open page on the user's device. If the user clicks the optional AI extraction button, the entered text is sent to a Cloudflare Worker and processed by Cloudflare Workers AI. The extracted numbers are shown for review. The site does not require an account or intentionally store calculation history or AI input. The “Copy total” button uses the browser's clipboard only when selected. Closing or reloading the page clears entries.
 
 Hosting and security services may process technical information needed to serve pages and protect the site, such as IP address, request time, browser details, and the requested page. When hosted by Cloudflare, Cloudflare may process that information under its own privacy policy. This visit information is separate from calculator input.
 
@@ -76,7 +76,7 @@ Source: https://sumcalculator.net/terms/
 
 Last updated: September 24, 2026.
 
-By using SumCalculator.net, visitors agree to its terms. The site offers a free, browser-based tool for adding lists of numbers and displaying basic statistics. It may be used for lawful personal or business purposes. Users are responsible for their inputs and how they use the results.
+By using SumCalculator.net, visitors agree to its terms. The site offers a free, browser-based tool for adding lists of numbers and displaying basic statistics, plus optional AI extraction from text. It may be used for lawful personal or business purposes. Users are responsible for their inputs and how they use the results.
 
 Software or input mistakes can affect results. Sums use exact decimal arithmetic; repeating decimal averages are rounded to 10 places. Important totals should be verified independently, especially for financial, legal, medical, or other consequential uses. The site may change, suspend, or discontinue at any time.
 

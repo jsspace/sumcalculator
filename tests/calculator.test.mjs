@@ -31,4 +31,5 @@ test('formats without converting to a floating-point number', () => {
 test('rejects nonnumeric text rather than calculating a partial total', () => {
   assert.throws(() => calculate('2 apples'), /not a number/);
   assert.equal(calculate(' ').count, 0);
+  assert.equal(calculate(',,;').count, 0);
 });

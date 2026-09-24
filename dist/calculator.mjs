@@ -12,7 +12,7 @@ function tenTo(power) {
 
 function parseDecimal(token) {
   const match = /^([+-]?)(?:(\d+)(?:\.(\d*))?|\.(\d+))(?:e([+-]?\d+))?$/i.exec(token);
-  if (!match) throw new Error(`“${token.slice(0, 24)}” is not a number. Remove labels or symbols and try again.`);
+  if (!match) throw new Error(`“${token.slice(0, 24)}” is not a number. Remove labels or symbols, or use AI below to extract numbers.`);
 
   const integer = match[2] || '0';
   const fraction = match[3] ?? match[4] ?? '';
@@ -58,6 +58,7 @@ export function calculate(raw) {
   if (!trimmed) return { sum: '0', count: 0, average: null, minimum: null, maximum: null };
 
   const tokens = trimmed.split(/[\s,，;；]+/).filter(Boolean);
+  if (!tokens.length) return { sum: '0', count: 0, average: null, minimum: null, maximum: null };
   const values = tokens.map(parseDecimal);
   const scale = values.reduce((maximum, value) => Math.max(maximum, value.scale), 0);
   let sum = 0n;
@@ -94,8 +95,21 @@ if (input) {
     maximum: document.getElementById('maximum'),
     error: document.getElementById('error-message'),
     copy: document.getElementById('copy-button'),
+    aiTools: document.getElementById('ai-tools'),
+    aiButton: document.getElementById('ai-button'),
+    aiStatus: document.getElementById('ai-status'),
+    aiPreview: document.getElementById('ai-preview'),
+    aiValues: document.getElementById('ai-values'),
+    aiApply: document.getElementById('ai-apply'),
   };
   let current = null;
+  let extracted = null;
+
+  function clearAiPreview() {
+    extracted = null;
+    elements.aiPreview.hidden = true;
+    elements.aiStatus.hidden = true;
+  }
 
   function render() {
     try {
@@ -107,6 +121,7 @@ if (input) {
       elements.minimum.textContent = format(result.minimum);
       elements.maximum.textContent = format(result.maximum);
       elements.error.hidden = true;
+      elements.aiTools.hidden = true;
       input.removeAttribute('aria-invalid');
       elements.copy.disabled = !current;
       elements.copy.innerHTML = 'Copy total <span aria-hidden="true">↗</span>';
@@ -120,18 +135,76 @@ if (input) {
       elements.copy.disabled = true;
       elements.error.textContent = error.message;
       elements.error.hidden = false;
+      elements.aiTools.hidden = !error.message.includes('is not a number');
       input.setAttribute('aria-invalid', 'true');
     }
   }
 
-  input.addEventListener('input', render);
+  input.addEventListener('input', () => {
+    clearAiPreview();
+    render();
+  });
   document.getElementById('sample-button').addEventListener('click', () => {
     input.value = '12.5\n8.75\n-3\n24.25';
+    clearAiPreview();
     render();
     input.focus();
   });
   document.getElementById('clear-button').addEventListener('click', () => {
     input.value = '';
+    clearAiPreview();
+    render();
+    input.focus();
+  });
+  elements.aiButton.addEventListener('click', async () => {
+    const source = input.value.trim();
+    clearAiPreview();
+    if (!source) {
+      elements.aiStatus.textContent = 'Paste some text first.';
+      elements.aiStatus.hidden = false;
+      input.focus();
+      return;
+    }
+    if (source.length > 2000) {
+      elements.aiStatus.textContent = 'AI can read up to 2,000 characters at a time.';
+      elements.aiStatus.hidden = false;
+      return;
+    }
+    elements.aiButton.disabled = true;
+    elements.aiButton.textContent = 'Reading…';
+    elements.aiStatus.textContent = 'Reading your text with Cloudflare AI…';
+    elements.aiStatus.hidden = false;
+    try {
+      const response = await fetch('/api/parse', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ input: source }),
+      });
+      const data = await response.json().catch(() => ({ error: 'AI is available after the Cloudflare Worker is deployed.' }));
+      if (!response.ok) throw new Error(data.error || 'AI parsing failed.');
+      if (input.value.trim() !== source) return;
+      if (!Array.isArray(data.numbers) || !data.numbers.length) {
+        elements.aiStatus.textContent = 'No numbers found. Try a clearer list or enter numbers normally.';
+        return;
+      }
+      extracted = data.numbers;
+      elements.aiValues.textContent = extracted.join(' · ');
+      elements.aiPreview.hidden = false;
+      elements.aiStatus.textContent = `${extracted.length} number${extracted.length === 1 ? '' : 's'} found. Check them before calculating.`;
+    } catch (error) {
+      if (input.value.trim() === source) {
+        elements.aiStatus.textContent = error.message || 'AI parsing failed. Enter numbers normally.';
+        elements.aiStatus.hidden = false;
+      }
+    } finally {
+      elements.aiButton.disabled = false;
+      elements.aiButton.textContent = 'Extract numbers with AI';
+    }
+  });
+  elements.aiApply.addEventListener('click', () => {
+    if (!extracted) return;
+    input.value = extracted.join('\n');
+    clearAiPreview();
     render();
     input.focus();
   });
@@ -144,4 +217,5 @@ if (input) {
       elements.copy.textContent = 'Copy failed';
     }
   });
+  render();
 }
