@@ -5,6 +5,59 @@ const MAX_EXPONENT = 1000n;
 const AVERAGE_DECIMALS = 10;
 const powersOfTen = new Map([[0, 1n]]);
 
+function invalidNumber(token) {
+  throw new Error(`“${token.slice(0, 24)}” is not a number. Remove labels or symbols, or use AI below to extract numbers.`);
+}
+
+function operatorSign(character) {
+  if (character === '+' || character === '＋') return 1;
+  if (character === '-' || character === '−' || character === '－') return -1;
+  return null;
+}
+
+function inputTokens(raw) {
+  const numberAtPosition = /(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?/iy;
+  const tokens = [];
+  let index = 0;
+  let needsNumber = true;
+  let pendingSign = 1;
+  let hasPendingOperator = false;
+
+  while (index < raw.length) {
+    const character = raw[index];
+    if (/[\s,，;；]/.test(character)) {
+      if (hasPendingOperator && /[,，;；]/.test(character)) {
+        throw new Error('Finish the expression after the plus or minus sign.');
+      }
+      if (!needsNumber) needsNumber = true;
+      index++;
+      continue;
+    }
+
+    const sign = operatorSign(character);
+    if (sign !== null) {
+      pendingSign = needsNumber ? pendingSign * sign : sign;
+      needsNumber = true;
+      hasPendingOperator = true;
+      index++;
+      continue;
+    }
+
+    if (!needsNumber) invalidNumber(raw.slice(index, index + 24));
+    numberAtPosition.lastIndex = index;
+    const match = numberAtPosition.exec(raw);
+    if (!match) invalidNumber(raw.slice(index, index + 24));
+    tokens.push((pendingSign < 0 ? '-' : '') + match[0]);
+    index = numberAtPosition.lastIndex;
+    needsNumber = false;
+    pendingSign = 1;
+    hasPendingOperator = false;
+  }
+
+  if (hasPendingOperator) throw new Error('Finish the expression after the plus or minus sign.');
+  return tokens;
+}
+
 function tenTo(power) {
   if (!powersOfTen.has(power)) powersOfTen.set(power, 10n ** BigInt(power));
   return powersOfTen.get(power);
@@ -12,7 +65,7 @@ function tenTo(power) {
 
 function parseDecimal(token) {
   const match = /^([+-]?)(?:(\d+)(?:\.(\d*))?|\.(\d+))(?:e([+-]?\d+))?$/i.exec(token);
-  if (!match) throw new Error(`“${token.slice(0, 24)}” is not a number. Remove labels or symbols, or use AI below to extract numbers.`);
+  if (!match) invalidNumber(token);
 
   const integer = match[2] || '0';
   const fraction = match[3] ?? match[4] ?? '';
@@ -56,8 +109,10 @@ function roundedAverage(coefficient, scale, count) {
 export function calculate(raw) {
   const trimmed = raw.trim();
   if (!trimmed) return { sum: '0', count: 0, average: null, minimum: null, maximum: null };
+  const isoDate = /(?:^|[\s,，;；])(\d{4}-\d{1,2}-\d{1,2})(?=$|[\s,，;；])/.exec(trimmed);
+  if (isoDate) invalidNumber(isoDate[1]);
 
-  const tokens = trimmed.split(/[\s,，;；]+/).filter(Boolean);
+  const tokens = inputTokens(trimmed);
   if (!tokens.length) return { sum: '0', count: 0, average: null, minimum: null, maximum: null };
   const values = tokens.map(parseDecimal);
   const scale = values.reduce((maximum, value) => Math.max(maximum, value.scale), 0);

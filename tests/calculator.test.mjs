@@ -16,6 +16,16 @@ test('handles signs, separators, and exponent notation', () => {
   assert.equal(calculate('-0.00 0.00').sum, '0');
 });
 
+test('adds inline expressions with exact decimal arithmetic', () => {
+  assert.equal(calculate('7+6').sum, '13');
+  assert.equal(calculate('7 + 6').sum, '13');
+  assert.equal(calculate('0.1+0.2').sum, '0.3');
+  assert.equal(calculate('12.50＋.25−3.00').sum, '9.75');
+  assert.equal(calculate('1e+3+0.1').sum, '1000.1');
+  assert.equal(calculate('7--6').sum, '13');
+  assert.throws(() => calculate('7+'), /Finish the expression/);
+});
+
 test('rounds repeating averages to ten decimal places', () => {
   assert.equal(calculate('1 0 0').average, '0.3333333333');
   assert.equal(calculate('-1 0 0').average, '-0.3333333333');
@@ -30,6 +40,7 @@ test('formats without converting to a floating-point number', () => {
 
 test('rejects nonnumeric text rather than calculating a partial total', () => {
   assert.throws(() => calculate('2 apples'), /not a number/);
+  assert.throws(() => calculate('2026-09-24\n7.50'), /not a number/);
   assert.equal(calculate(' ').count, 0);
   assert.equal(calculate(',,;').count, 0);
 });
