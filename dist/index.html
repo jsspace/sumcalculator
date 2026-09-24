@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a35">
+  <title>Sum Calculator — Add Numbers Online Instantly | SumCalculator.net</title>
+  <meta name="description" content="Add a list of numbers instantly. Paste values separated by commas, spaces, or lines to see the sum, count, average, minimum, and maximum. Free and private.">
+  <link rel="canonical" href="https://sumcalculator.net/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sum Calculator — Add Numbers Online Instantly">
+  <meta property="og:description" content="Paste numbers. Get the total, count, average, minimum, and maximum instantly in your browser.">
+  <meta property="og:url" content="https://sumcalculator.net/">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Sum Calculator","url":"https://sumcalculator.net/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"A free online calculator for adding lists of numbers and finding their count, average, minimum, and maximum."}</script>
+  <script type="module" src="/calculator.mjs"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="/" aria-label="SumCalculator.net home"><span class="brand-mark">Σ</span><span>sumcalculator<span class="brand-dot">.net</span></span></a>
+      <nav aria-label="Main navigation"><a class="active" href="/" aria-current="page">Calculator</a><a href="/about/">About</a></nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell hero-inner">
+        <div class="eyebrow"><span class="eyebrow-line"></span> THE SIMPLE WAY TO ADD IT UP</div>
+        <h1>Sum Calculator</h1>
+        <p class="hero-copy">Paste a list of numbers. See the total and the details instantly.</p>
+        <div class="hero-pills"><span>Free to use</span><span>No sign up</span><span>Runs in your browser</span></div>
+      </div>
+    </section>
+
+    <section class="workspace shell" aria-label="Sum calculator">
+      <div class="calculator-card">
+        <div class="input-panel">
+          <div class="panel-heading"><div><p class="step">01 / INPUT</p><h2>Your numbers</h2></div><button id="sample-button" class="text-button" type="button">Try an example <span aria-hidden="true">↗</span></button></div>
+          <p class="panel-intro">Enter numbers separated by commas, spaces, semicolons, or new lines.</p>
+          <label class="sr-only" for="numbers">Numbers to add</label>
+          <textarea id="numbers" spellcheck="false" inputmode="decimal" placeholder="12.50&#10;8.75&#10;-3&#10;24.25" aria-describedby="input-hint error-message"></textarea>
+          <div class="input-bottom"><span id="input-hint">Decimals and negative numbers are welcome.</span><button id="clear-button" class="subtle-button" type="button">Clear all</button></div>
+          <p id="error-message" class="error-message" role="alert" hidden></p>
+        </div>
+        <div class="result-panel" aria-live="polite" aria-atomic="true">
+          <div class="panel-heading"><div><p class="step">02 / RESULT</p><h2>Your total</h2></div><span class="live-indicator"><span></span> LIVE RESULT</span></div>
+          <div class="total-box"><span class="total-label">SUM</span><output id="sum" for="numbers">0</output><button id="copy-button" class="copy-button" type="button" disabled aria-label="Copy sum to clipboard">Copy total <span aria-hidden="true">↗</span></button></div>
+          <div class="stats-grid"><div><span>Count</span><output id="count" for="numbers">0</output></div><div><span>Average</span><output id="average" for="numbers">—</output></div><div><span>Minimum</span><output id="minimum" for="numbers">—</output></div><div><span>Maximum</span><output id="maximum" for="numbers">—</output></div></div>
+          <p class="privacy-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4.5" y="10" width="15" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> Your numbers stay on this device.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section shell">
+      <div class="section-lead"><p class="kicker">THE QUICK GUIDE</p><h2>Add numbers without the extra steps.</h2><p>Use this sum calculator for expenses, scores, measurements, or any list that needs a reliable total. Paste a column from a spreadsheet or type values directly.</p></div>
+      <div class="how-grid"><article><span class="how-num">01</span><h3>Paste your list</h3><p>Use one number per line or separate values with commas, spaces, or semicolons.</p></article><article><span class="how-num">02</span><h3>Check the sum</h3><p>The total updates as you type. The count helps you confirm that every value was included.</p></article><article><span class="how-num">03</span><h3>See the context</h3><p>Average, minimum, and maximum help you understand the list at a glance.</p></article></div>
+    </section>
+
+    <section class="example-section"><div class="shell example-inner"><div><p class="kicker">A QUICK EXAMPLE</p><h2>What is the sum of 12.5, 8.75, −3, and 24.25?</h2><p>Add the four values and the sum is <strong>42.5</strong>. Their average is <strong>10.625</strong>. Select “Try an example” above to see it in the calculator.</p></div><div class="equation" aria-label="12.5 plus 8.75 minus 3 plus 24.25 equals 42.5"><span>12.5 + 8.75 − 3 + 24.25</span><strong>= 42.5</strong></div></div></section>
+
+    <section class="faq-section shell"><div class="faq-heading"><p class="kicker">GOOD TO KNOW</p><h2>Frequently asked questions</h2></div><div class="faq-list"><details><summary>What separators can I use?</summary><p>Commas, Chinese commas, semicolons, spaces, tabs, and line breaks all work. Because commas separate values, enter 1234 rather than 1,234 for one thousand two hundred thirty-four.</p></details><details><summary>Can I add negative numbers and decimals?</summary><p>Yes. Values such as −3, 0.5, and .75 are supported. Remove currency signs or other text from the list before calculating.</p></details><details><summary>How is the average calculated?</summary><p>The average is the sum divided by the count of valid numbers. Every entered number has equal weight. Repeating decimals are rounded to 10 decimal places; the sum itself is exact.</p></details><details><summary>Are my numbers saved or uploaded?</summary><p>No. The calculation runs in your browser. This site does not send the numbers you enter to a server or store them in an account.</p></details></div></section>
+  </main>
+
+  <footer class="site-footer"><div class="shell footer-inner"><div><a class="brand footer-brand" href="/"><span class="brand-mark">Σ</span><span>sumcalculator<span class="brand-dot">.net</span></span></a><p>Simple totals, right when you need them.</p></div><nav aria-label="Footer navigation"><a href="/about/">About</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Use</a></nav><small>© 2026 SumCalculator.net</small></div></footer>
+</body>
+</html>
