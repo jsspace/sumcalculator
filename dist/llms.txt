@@ -1,0 +1,17 @@
+# SumCalculator.net
+
+> SumCalculator.net is a free, browser-based sum calculator. Paste a list of numbers to see the exact decimal sum, count, average, minimum, and maximum. Calculator entries stay in the browser.
+
+The calculator accepts plain signed decimals separated by commas, Chinese commas, semicolons, spaces, tabs, or line breaks. A comma is always a separator, so `1,234` is read as two numbers. Repeating decimal averages are rounded to 10 decimal places; sums are calculated with decimal-string arithmetic.
+
+## Main pages
+
+- [Sum Calculator](https://sumcalculator.net/): The interactive calculator, usage guide, example, and frequently asked questions.
+- [Full site content](https://sumcalculator.net/llms-full.txt): Consolidated Markdown covering the calculator and the site's information pages.
+
+## Site information
+
+- [About](https://sumcalculator.net/about/): Purpose and approach of the site.
+- [Contact](https://sumcalculator.net/contact/): General feedback and privacy contact addresses.
+- [Privacy Policy](https://sumcalculator.net/privacy/): Browser-based calculation, Google Analytics, hosting, and the external badge.
+- [Terms of Use](https://sumcalculator.net/terms/): Usage, accuracy, and liability terms.

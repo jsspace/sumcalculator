@@ -1,0 +1,85 @@
+# SumCalculator.net
+
+> A free browser-based tool for adding lists of numbers. The calculator shows an exact decimal sum, count, average, minimum, and maximum. Its input is processed locally in the browser.
+
+This file consolidates the site's public information. The linked HTML pages are the current source for the interactive tool and legal policies.
+
+## Sum Calculator
+
+Source: https://sumcalculator.net/
+
+Paste or type a list of numbers into the input box. The result updates as the input changes. Values may be separated by commas, Chinese commas, semicolons, spaces, tabs, or line breaks. Plain positive and negative decimals are supported. Scientific notation is also accepted. Currency signs, percentages, labels, and other nonnumeric tokens cause an error; the calculator does not show a partial result.
+
+The calculator shows:
+
+- **Sum:** The exact decimal total of all values.
+- **Count:** The number of values read.
+- **Average:** The sum divided by the count, rounded to at most 10 decimal places when needed.
+- **Minimum:** The smallest entered value.
+- **Maximum:** The largest entered value.
+
+Sums and comparisons use decimal-string arithmetic with `BigInt`, avoiding JavaScript floating-point rounding in the total. The “Copy total” button copies the ungrouped exact sum. The “Try an example” button inserts sample values; “Clear all” removes the input and resets the result.
+
+### Example
+
+Input: `12.5, 8.75, -3, 24.25`
+
+- Sum: `42.5`
+- Count: `4`
+- Average: `10.625`
+- Minimum: `-3`
+- Maximum: `24.25`
+
+### Input notes
+
+- A comma separates values. Enter `1234` rather than `1,234` if you mean one thousand two hundred thirty-four.
+- Negative numbers and decimals such as `-3`, `0.5`, and `.75` are supported.
+- The average gives every value equal weight.
+- Always check the count against the number of values you intended to paste.
+- Calculations run in the browser. The site does not receive or save the list entered into the calculator.
+
+## About
+
+Source: https://sumcalculator.net/about/
+
+SumCalculator.net is an independent, focused tool for adding a list of numbers quickly. It is meant for small tasks such as adding receipts, scores, or numbers copied from notes without opening a spreadsheet.
+
+It reads plain numbers separated by lines, spaces, commas, or semicolons, then shows the total, number of values, average, smallest value, and largest value. It supports positive and negative decimal numbers. If an entry contains text or a symbol it cannot read, it shows an error so the list can be corrected.
+
+The calculator runs in the browser. The numbers typed are not sent to the site's server, saved to an account, or shared with the site operator. For critical financial or professional decisions, check the source data and verify the result independently.
+
+## Contact
+
+Source: https://sumcalculator.net/contact/
+
+For general questions, suggestions, or problem reports, email `hello@sumcalculator.net`. For privacy questions, email `privacy@sumcalculator.net` or read the Privacy Policy. A small, non-sensitive example and the expected result can help explain a calculation problem. The site cannot see or recover numbers entered into the calculator unless the user chooses to include them in an email.
+
+## Privacy Policy
+
+Source: https://sumcalculator.net/privacy/
+
+Last updated: September 24, 2026.
+
+The numbers entered into the calculator are processed in the browser. The site does not send the list of numbers to a server. Entries and results remain in the open page on the user's device. The site does not require an account, store calculation history, or receive the list typed. The “Copy total” button uses the browser's clipboard only when selected. Closing or reloading the page clears entries.
+
+Hosting and security services may process technical information needed to serve pages and protect the site, such as IP address, request time, browser details, and the requested page. When hosted by Cloudflare, Cloudflare may process that information under its own privacy policy. This visit information is separate from calculator input.
+
+The site uses Google Analytics 4 to understand visits. Google may receive page views, referral information, browser and device details, and interactions with the site. Its tag may set first-party cookies, including `_ga` and `_ga_*`, to distinguish visits. The site does not send numbers entered into the calculator as custom analytics events. Users can manage or block cookies in their browser settings. Google's policy: https://policies.google.com/privacy
+
+The home page displays a badge image hosted by Findly.tools. Loading it sends a browser request to Findly.tools, which may receive standard request information such as IP address and browser details. Following that external link is subject to Findly.tools' privacy practices. Other external sites have their own policies.
+
+The policy may change as the site evolves. Privacy questions can be sent to `privacy@sumcalculator.net`.
+
+## Terms of Use
+
+Source: https://sumcalculator.net/terms/
+
+Last updated: September 24, 2026.
+
+By using SumCalculator.net, visitors agree to its terms. The site offers a free, browser-based tool for adding lists of numbers and displaying basic statistics. It may be used for lawful personal or business purposes. Users are responsible for their inputs and how they use the results.
+
+Software or input mistakes can affect results. Sums use exact decimal arithmetic; repeating decimal averages are rounded to 10 places. Important totals should be verified independently, especially for financial, legal, medical, or other consequential uses. The site may change, suspend, or discontinue at any time.
+
+Users must not interfere with the site, attempt unauthorized access, or violate applicable law or others' rights. The calculator provides arithmetic output only; it does not provide accounting, financial, legal, medical, or other professional advice.
+
+To the extent permitted by applicable law, the site is provided “as is” and without warranties. The site operator is not liable for losses arising from use of, or inability to use, the site. Nothing in the terms excludes rights or liability that cannot legally be excluded. The terms may be revised, with the latest revision date shown on the page. Questions can be sent to `hello@sumcalculator.net`.
