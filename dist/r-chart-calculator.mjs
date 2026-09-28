@@ -119,6 +119,7 @@ if (input) {
   const aiStatus = document.getElementById('r-ai-status');
   const aiPreview = document.getElementById('r-ai-preview');
   const aiApply = document.getElementById('r-ai-apply');
+  const nAssumption = document.getElementById('r-n-assumption');
   let requestVersion = 0;
   let extracted = null;
   const fields = Object.fromEntries(['ucl', 'average', 'lcl', 'factor', 'count', 'formula', 'rows', 'chart'].map(key => [key, document.getElementById(`r-${key}`)]));
@@ -283,16 +284,17 @@ if (input) {
       aiTools.hidden = !input.value.trim() || structured;
     }
   }
-  const modeChoice = setupChoice('mode', () => { input.value = ''; updateInputLabel(); render(); });
-  input.addEventListener('input', render);
-  size.addEventListener('input', render);
+  const modeChoice = setupChoice('mode', () => { input.value = ''; nAssumption.hidden = true; updateInputLabel(); render(); });
+  input.addEventListener('input', () => { nAssumption.hidden = true; render(); });
+  size.addEventListener('input', () => { nAssumption.hidden = true; render(); });
   document.getElementById('r-example').addEventListener('click', () => {
     modeChoice.set('ranges'); size.value = '8';
     input.value = '0.3\n0.4\n0.2\n0.4';
+    nAssumption.hidden = true;
     updateInputLabel();
     render(); input.focus();
   });
-  document.getElementById('r-clear').addEventListener('click', () => { input.value = ''; render(); input.focus(); });
+  document.getElementById('r-clear').addEventListener('click', () => { input.value = ''; nAssumption.hidden = true; render(); input.focus(); });
   aiButton.addEventListener('click', async () => {
     const source = input.value;
     if (source.length > 5000) {
@@ -317,8 +319,10 @@ if (input) {
       if (version !== requestVersion) return;
       extracted = data.extraction;
       document.getElementById('r-ai-values').textContent = extracted.rows.join('\n');
+      const currentN = Number(size.value);
+      const usableN = Number.isInteger(currentN) && currentN >= 2 && currentN <= MAX_SUBGROUP_SIZE;
       document.getElementById('r-ai-note').textContent = (extracted.note ? `${extracted.note} ` : '') +
-        (extracted.subgroupSize ? `Subgroup size n = ${extracted.subgroupSize}.` : 'Subgroup size n was not stated. Choose it before calculating UCL.');
+        (extracted.subgroupSize ? `Subgroup size n = ${extracted.subgroupSize}.` : `Subgroup size n was not stated. The calculator will use ${usableN ? `your current n = ${currentN}` : 'the example assumption n = 8'}; edit it if you know the actual size.`);
       aiPreview.hidden = false;
       aiStatus.hidden = true;
     } catch (issue) {
@@ -334,12 +338,21 @@ if (input) {
   });
   aiApply.addEventListener('click', () => {
     if (!extracted) return;
-    modeChoice.set(extracted.mode);
-    size.value = extracted.subgroupSize;
-    input.value = extracted.rows.join('\n');
+    const chosen = extracted;
+    const currentN = Number(size.value);
+    const usableN = Number.isInteger(currentN) && currentN >= 2 && currentN <= MAX_SUBGROUP_SIZE;
+    modeChoice.set(chosen.mode);
+    if (chosen.subgroupSize) {
+      size.value = chosen.subgroupSize;
+      nAssumption.hidden = true;
+    } else {
+      if (!usableN) size.value = '8';
+      nAssumption.textContent = `The text did not state n. Using n = ${size.value} as an assumption; change it if you know the observations per subgroup.`;
+      nAssumption.hidden = false;
+    }
+    input.value = chosen.rows.join('\n');
     updateInputLabel();
-    render();
-    (size.value ? input : size).focus();
+    render(); input.focus();
   });
   render();
 }
