@@ -1,5 +1,7 @@
 # SumCalculator
 
+The site also includes an [R Chart UCL Calculator](https://sumcalculator.net/r-chart-ucl-calculator/) for three-sigma range chart limits. It accepts subgroup maximum/minimum pairs or precomputed ranges, uses NIST D₃/D₄ constants for subgroup sizes 2–10 and numerically computes them for larger integer subgroup sizes, shows calculation steps for every valid input, and plots the ranges. Its calculations run locally in the browser. Optional AI extraction accepts a pasted question at POST `/api/r-chart-parse`, proposes structured subgroup data for review, and leaves the subgroup size unset when the question does not state it.
+
 A sum calculator with About, Contact, Privacy Policy, and Terms of Use pages. Regular calculation runs in the browser. Totals and extremes use decimal-string arithmetic with `BigInt`; averages are rounded to 10 decimal places. An optional AI button extracts numbers from messy text through Cloudflare Workers AI, then asks users to review the proposed list before calculating.
 
 ## Preview locally

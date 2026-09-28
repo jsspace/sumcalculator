@@ -7,6 +7,7 @@ The calculator accepts plain signed decimals separated by commas, Chinese commas
 ## Main pages
 
 - [Sum Calculator](https://sumcalculator.net/): The interactive calculator, optional AI extraction, usage guide, example, and frequently asked questions.
+- [R Chart UCL Calculator](https://sumcalculator.net/r-chart-ucl-calculator/): Calculate the three-sigma upper and lower control limits from subgroup maximums and minimums or precomputed ranges. Optional AI extraction turns a pasted question into subgroup data for review. Enter a whole-number subgroup size n from 2 to 1,000,000; factors above n = 10 are calculated numerically. For ranges 0.3, 0.4, 0.2, 0.4 and n = 8, the average range is 0.325 and UCL is 0.6058, rounded to 0.61.
 - [Full site content](https://sumcalculator.net/llms-full.txt): Consolidated Markdown covering the calculator and the site's information pages.
 
 ## Site information

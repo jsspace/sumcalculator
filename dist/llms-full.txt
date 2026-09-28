@@ -38,6 +38,16 @@ Input: `12.5, 8.75, -3, 24.25`
 - Always check the count against the number of values you intended to paste.
 - Regular calculation runs in the browser. Optional AI extraction sends the entered text to Cloudflare only when clicked; the site does not save calculation history.
 
+## R Chart UCL Calculator
+
+Source: https://sumcalculator.net/r-chart-ucl-calculator/
+
+Enter one subgroup per line as maximum and minimum values, or switch to precomputed ranges. Enter the whole-number observations per subgroup (n = 2 to 1,000,000). The calculator finds each range, their average R̄, and the standard three-sigma R-chart limits: UCL = D₄ × R̄ and LCL = D₃ × R̄. D₃ and D₄ depend on n; n = 2–10 uses the table in the NIST Engineering Statistics Handbook (https://itl.nist.gov/div898/handbook/pmc/section3/pmc321.htm), while larger n uses numerical calculation of the normal-range moments. For every valid input, the page shows the subgroup ranges, average-range division, selected factors, and UCL/LCL multiplication steps. It also plots subgroup ranges and lists any point outside the limits. Calculations run in the browser.
+
+If a visitor pastes a written question instead of structured data, the optional “Extract subgroup data with AI” button sends that text to Cloudflare Workers AI only when clicked. It proposes either ranges or maximum/minimum pairs for review before applying them. If the question does not explicitly state observations per subgroup, the tool leaves n unselected.
+
+For ranges 0.3, 0.4, 0.2, and 0.4, R̄ = 0.325. If n = 8, D₄ = 1.864, so UCL = 0.6058, or 0.61 to two decimal places. The count of subgroups is four; n is eight observations within each subgroup. A z value of 3 alone does not determine the UCL.
+
 ## About
 
 Source: https://sumcalculator.net/about/
@@ -58,9 +68,9 @@ For general questions, suggestions, or problem reports, email `yimin.space.fe@gm
 
 Source: https://sumcalculator.net/privacy/
 
-Last updated: September 24, 2026.
+Last updated: September 28, 2026.
 
-Regular calculation is processed in the browser; its entries and results remain in the open page on the user's device. If the user clicks the optional AI extraction button, the entered text is sent to a Cloudflare Worker and processed by Cloudflare Workers AI. The extracted numbers are shown for review. The site does not require an account or intentionally store calculation history or AI input. The “Copy total” button uses the browser's clipboard only when selected. Closing or reloading the page clears entries.
+Regular calculation is processed in the browser; its entries and results remain in the open page on the user's device. If the user clicks an optional AI extraction button on either calculator, the entered text is sent to a Cloudflare Worker and processed by Cloudflare Workers AI. The extracted numbers or subgroup data are shown for review. The site does not require an account or intentionally store calculation history or AI input. The “Copy total” button uses the browser's clipboard only when selected. Closing or reloading the page clears entries.
 
 Hosting and security services may process technical information needed to serve pages and protect the site, such as IP address, request time, browser details, and the requested page. When hosted by Cloudflare, Cloudflare may process that information under its own privacy policy. This visit information is separate from calculator input.
 
@@ -74,11 +84,11 @@ The policy may change as the site evolves. Privacy questions can be sent to `yim
 
 Source: https://sumcalculator.net/terms/
 
-Last updated: September 24, 2026.
+Last updated: September 28, 2026.
 
-By using SumCalculator, visitors agree to its terms. The site offers a free, browser-based tool for adding lists of numbers and displaying basic statistics, plus optional AI extraction from text. It may be used for lawful personal or business purposes. Users are responsible for their inputs and how they use the results.
+By using SumCalculator, visitors agree to its terms. The site offers free, browser-based sum and R-chart calculators, plus optional AI extraction from text. It may be used for lawful personal or business purposes. Users are responsible for their inputs and how they use the results.
 
-Software or input mistakes can affect results. Sums use exact decimal arithmetic; repeating decimal averages are rounded to 10 places. Important totals should be verified independently, especially for financial, legal, medical, or other consequential uses. The site may change, suspend, or discontinue at any time.
+Software or input mistakes can affect results. Sums use exact decimal arithmetic; repeating decimal averages are rounded to 10 places. R-chart limits use tabulated three-sigma factors for n = 2–10 and numerically calculated factors for larger subgroup sizes. Important results should be verified independently, especially for financial, legal, medical, or other consequential uses. The site may change, suspend, or discontinue at any time.
 
 Users must not interfere with the site, attempt unauthorized access, or violate applicable law or others' rights. The calculator provides arithmetic output only; it does not provide accounting, financial, legal, medical, or other professional advice.
 
