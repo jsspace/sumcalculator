@@ -179,7 +179,7 @@ if (input) {
       elements.aiTools.hidden = true;
       input.removeAttribute('aria-invalid');
       elements.copy.disabled = !current;
-      elements.copy.innerHTML = 'Copy total <span aria-hidden="true">↗</span>';
+      elements.copy.innerHTML = 'Copy total <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>';
     } catch (error) {
       current = null;
       elements.sum.textContent = '—';

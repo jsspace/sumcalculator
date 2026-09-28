@@ -267,7 +267,7 @@ if (input) {
       fields.factor.textContent = result.d4.toFixed(3);
       fields.count.textContent = String(result.count);
       fields.formula.textContent = `UCL = R̄ × D₄ = ${display(result.averageRange)} × ${result.d4.toFixed(3)} = ${display(result.ucl)} ≈ ${roundedUcl}`;
-      copyButton.innerHTML = 'Copy <span aria-hidden="true">↗</span>';
+      copyButton.innerHTML = 'Copy <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>';
       copyButton.setAttribute('aria-label', `Copy UCL ${roundedUcl}`);
       fields.rows.replaceChildren();
       result.rows.forEach((row, index) => {
