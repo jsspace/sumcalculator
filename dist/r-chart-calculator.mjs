@@ -120,8 +120,12 @@ if (input) {
   const aiPreview = document.getElementById('r-ai-preview');
   const aiApply = document.getElementById('r-ai-apply');
   const nAssumption = document.getElementById('r-n-assumption');
+  const copyButton = document.getElementById('r-copy');
+  const uclPrecise = document.getElementById('r-ucl-precise');
+  const lclPrecise = document.getElementById('r-lcl-precise');
   let requestVersion = 0;
   let extracted = null;
+  let currentResult = null;
   const fields = Object.fromEntries(['ucl', 'average', 'lcl', 'factor', 'count', 'formula', 'rows', 'chart'].map(key => [key, document.getElementById(`r-${key}`)]));
   const display = number => number.toLocaleString('en-US', { maximumSignificantDigits: 15 });
 
@@ -242,6 +246,7 @@ if (input) {
 
   function render() {
     clearAiPreview();
+    currentResult = null;
     try {
       const result = calculateRChart(input.value, Number(size.value), mode.value);
       output.hidden = !result;
@@ -252,12 +257,18 @@ if (input) {
       input.removeAttribute('aria-invalid');
       size.removeAttribute('aria-invalid');
       if (!result) return;
-      fields.ucl.textContent = display(result.ucl);
+      currentResult = result;
+      const roundedUcl = result.ucl.toFixed(2);
+      fields.ucl.textContent = roundedUcl;
+      uclPrecise.textContent = result.ucl.toFixed(4);
       fields.average.textContent = display(result.averageRange);
-      fields.lcl.textContent = display(result.lcl);
+      fields.lcl.textContent = result.lcl.toFixed(2);
+      lclPrecise.textContent = result.lcl.toFixed(4);
       fields.factor.textContent = result.d4.toFixed(3);
       fields.count.textContent = String(result.count);
-      fields.formula.textContent = `UCL = R̄ × D₄ = ${display(result.averageRange)} × ${result.d4.toFixed(3)} = ${display(result.ucl)} (≈ ${result.ucl.toFixed(2)} to two decimals)`;
+      fields.formula.textContent = `UCL = R̄ × D₄ = ${display(result.averageRange)} × ${result.d4.toFixed(3)} = ${display(result.ucl)} ≈ ${roundedUcl}`;
+      copyButton.innerHTML = 'Copy <span aria-hidden="true">↗</span>';
+      copyButton.setAttribute('aria-label', `Copy UCL ${roundedUcl}`);
       fields.rows.replaceChildren();
       result.rows.forEach((row, index) => {
         const tr = document.createElement('tr');
@@ -284,6 +295,18 @@ if (input) {
       aiTools.hidden = !input.value.trim() || structured;
     }
   }
+  copyButton.addEventListener('click', async () => {
+    if (!currentResult) return;
+    const value = currentResult.ucl.toFixed(2);
+    try {
+      await navigator.clipboard.writeText(value);
+      copyButton.textContent = 'Copied!';
+      copyButton.setAttribute('aria-label', `Copied UCL ${value}`);
+    } catch {
+      copyButton.textContent = 'Copy failed';
+      copyButton.setAttribute('aria-label', `Could not copy UCL ${value}`);
+    }
+  });
   const modeChoice = setupChoice('mode', () => { input.value = ''; nAssumption.hidden = true; updateInputLabel(); render(); });
   input.addEventListener('input', () => { nAssumption.hidden = true; render(); });
   size.addEventListener('input', () => { nAssumption.hidden = true; render(); });
